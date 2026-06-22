@@ -103,13 +103,11 @@ vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 
---  ================================
 --  PERSONAL: line numbers
---  ================================
+
 vim.o.relativenumber = true
---  ================================
+
 --  END PERSONAL
---  ================================
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -565,16 +563,13 @@ require('lazy').setup({
           --  For example, in C this would take you to the header.
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-          --  ================================
           --  PERSONAL: key bindings
-          --  ================================
+
           map('<leader>e', vim.diagnostic.open_float, 'Show diagnostic [E]rror float')
           map(']d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to next [D]iagnostic')
           map('[d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to prev [D]iagnostic')
 
-          --  ================================
           --  END PERSONAL
-          --  ================================
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -661,13 +656,12 @@ require('lazy').setup({
             Lua = {},
           },
         },
-        --  ================================
+
         --  PERSONAL: basedpyright
-        --  ================================
+
         basedpyright = {},
-        --  ================================
+
         --  END PERSONAL
-        --  ================================
       }
 
       -- Ensure the servers and tools above are installed
@@ -804,9 +798,8 @@ require('lazy').setup({
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
 
-        --  ================================
         --  PERSONAL: completion settings
-        --  ================================
+
         -- Available options were showing up in insert mode
         -- The same `<c-space>` above will display the menu
         menu = { auto_show = false },
@@ -820,9 +813,8 @@ require('lazy').setup({
             -- auto_insert = false,
           },
         },
-        --  ================================
+
         --  END PERSONAL
-        --  ================================
       },
 
       sources = {
@@ -865,9 +857,8 @@ require('lazy').setup({
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
 
-      --  ================================
       --  PERSONAL: colorscheme
-      --  ================================
+
       -- Improve hover/diagnostic float legibility against tokyonight-night.
       -- bg = tokyonight's bg_dark variant; fg/border use the theme's blue accent.
       -- vim.api.nvim_set_h1(0, 'NormalFloat', { bg = '#1e2030', fg = '#c0caf5' })
@@ -877,9 +868,8 @@ require('lazy').setup({
       local colors = require('tokyonight.colors').setup()
       vim.api.nvim_set_hl(0, 'NormalFloat', { bg = colors.bg_dark, fg = colors.fg })
       vim.api.nvim_set_hl(0, 'FloatBorder', { bg = colors.bg_dark, fg = colors.blue })
-      --  ================================
+
       --  END PERSONAL
-      --  ================================
     end,
   },
 
@@ -990,9 +980,8 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 
-  --  ================================
   --  PERSONAL: mypy
-  --  ================================
+
   {
     'mfussenegger/nvim-lint',
     event = { 'BufWritePost', 'BufReadPost', 'InsertLeave' },
@@ -1013,9 +1002,8 @@ require('lazy').setup({
       })
     end,
   },
-  --  ================================
+
   --  END PERSONAL
-  --  ================================
 }, { ---@diagnostic disable-line: missing-fields
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
