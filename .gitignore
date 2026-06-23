@@ -11,3 +11,6 @@ spell/
 lazy-lock.json
 
 .DS_Store
+
+# notes and things unnecessary in git
+NVIM_CONFIG_WORKFLOW.md
