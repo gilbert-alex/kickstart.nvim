@@ -110,7 +110,7 @@ do
   vim.o.number = true
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
-  -- vim.o.relativenumber = true
+  vim.o.relativenumber = true
 
   -- Enable mouse mode, can be useful for resizing splits for example!
   vim.o.mouse = 'a'
@@ -166,7 +166,7 @@ do
 
   -- Minimal number of screen lines to keep above and below the cursor.
   vim.o.scrolloff = 10
-
+  
   -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
@@ -648,6 +648,12 @@ do
       --  For example, in C this would take you to the header.
       map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+      --  PERSONAL: key bindings
+      map('<leader>e', vim.diagnostic.open_float, 'Show diagnostic [E]rror float')
+      map(']d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to next [D]iagnostic')
+      map('[d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to prev [D]iagnostic')
+      --  END PERSONAL
+      
       -- The following two autocommands are used to highlight references of the
       -- word under your cursor when your cursor rests there for a little while.
       --    See `:help CursorHold` for information about when this is executed
@@ -738,6 +744,11 @@ do
         },
       },
     },
+
+    --  PERSONAL: basedpyright
+    basedpyright = {},
+    --  END PERSONAL
+
   }
 
   vim.pack.add {
@@ -760,6 +771,7 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'mypy',   # PERSONAL - install MyPy via Mason
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -868,6 +880,22 @@ do
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = false, auto_show_delay_ms = 500 },
+      
+      --  PERSONAL: completion settings
+      -- Available options were showing up in insert mode
+      -- The same `<c-space>` above will display the menu
+      menu = { auto_show = false },
+      -- TODO: ctrl+y does what I want here but I may want to change to super-tab
+      -- TODO: see above `preset` and read help as suggested
+      list = {
+        selection = {
+          -- Prevents the first item from auto-selecting while you are typing
+          preselect = false,
+          -- Stops the plugin from auto-inserting the completed text in your buffer
+          -- auto_insert = false,
+        },
+      },
+      --  END PERSONAL
     },
 
     sources = {
@@ -980,4 +1008,5 @@ do
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
+require 'custom.personal'
 -- vim: ts=2 sts=2 sw=2 et
