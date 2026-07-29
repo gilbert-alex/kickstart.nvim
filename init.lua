@@ -653,7 +653,7 @@ do
       map(']d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to next [D]iagnostic')
       map('[d', function() vim.diagnostic.jump { count = 1 } end, 'Jump to prev [D]iagnostic')
       --  END PERSONAL
-      
+
       -- The following two autocommands are used to highlight references of the
       -- word under your cursor when your cursor rests there for a little while.
       --    See `:help CursorHold` for information about when this is executed
@@ -698,6 +698,7 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
+    basedpyright = {},  -- PERSONAL
     -- clangd = {},
     -- gopls = {},
     -- pyright = {},
@@ -744,11 +745,6 @@ do
         },
       },
     },
-
-    --  PERSONAL: basedpyright
-    basedpyright = {},
-    --  END PERSONAL
-
   }
 
   vim.pack.add {
@@ -771,7 +767,8 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
-    'mypy',   -- PERSONAL - install MyPy via Mason
+    'mypy',   -- PERSONAL
+    'black',  -- PERSONAL
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -795,7 +792,7 @@ do
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
         -- lua = true,
-        -- python = true,
+        python = true,  -- PERSONAL
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -814,6 +811,7 @@ do
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      python = { 'black' }, -- PERSONAL
     },
   }
 
