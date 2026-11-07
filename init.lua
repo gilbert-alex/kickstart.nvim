@@ -769,6 +769,7 @@ do
     -- You can add other tools here that you want Mason to install
     'mypy',   -- PERSONAL
     'black',  -- PERSONAL
+    'yapf',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -792,7 +793,7 @@ do
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
         -- lua = true,
-        python = true,  -- PERSONAL
+        python = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -811,7 +812,7 @@ do
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
-      python = { 'black' }, -- PERSONAL
+      python = { 'yapf' }, -- PERSONAL
     },
   }
 
@@ -1006,5 +1007,5 @@ do
 end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
-require 'custom.personal'
 -- vim: ts=2 sts=2 sw=2 et
+require 'custom.personal'
